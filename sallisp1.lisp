@@ -39,6 +39,8 @@
 (defvar turnsofdice 0)
 (defvar turnsofgame 0)
 (defvar turnsofdiceforagame 0)
+(defvar turnsasmoney 1)
+(defvar basispoint 100)
 (defvar numberofdiceturns 1000)
 (defvar ladderStart '(8 19 21 28 36 43 50 54 61 62 66 ))
 (defvar ladderEnd '( 26 38 82 53 57 77 91 88 99 96 87 ))
@@ -84,10 +86,11 @@
 	(loop
 		(if (> turnsofdice numberofdiceturns) (return))
 		(setf pos (dice pos))
-		(TurnsofDice)
+		;(TurnsofDice)
 		;(print pos)
 		(if (> pos 100) (numberofGames))
-		;(SnakesLadders)
+		(TurnsofDice)
+		(SnakesLadders)
 	)
 
 )
@@ -135,12 +138,29 @@
 	(set 'pos (- pos 100))
 	(set 'turnsofgame (+ turnsofgame 1))
 	;turnsofgame++;
-	;turnsasmoney = turnsasmoney*(((10000 - basispoint) / 10000) + (basispoint / (float64(turnsofdiceforagame) * 350)));
+	(let ((tmp1)(tmp2))
+		(setf tmp1 (/ (- 10000 basispoint) 10000))
+		(setf tmp2 (/ basispoint ( * (+ turnsofdiceforagame 1) 350)))
+		(setf turnsasmoney  (* turnsasmoney (+ tmp1 tmp2)))
+	)
 	;logmultiple();
 	(set 'turnsofdiceforagame  0)
 )
+(defun SnakesLadders()
+	(let ((li)(si))
+	(when (> (aref states pos) 0)
+		(setf li (aref lIndex pos))
+		(setf si (aref sIndex pos))
+		(if (> li 0)(setf (aref ladderHit li) (+ (aref ladderHit li) 1)))
+		(if (> si 0)(setf (aref snakeHit li) (+ (aref snakeHit li) 1)))
+		(setf pos (aref states pos))
+	)
+	)
+	;return pos;
+)
 
 (runGame)
+(print turnsasmoney)
 #|
 const numberofboards = 101
 const boardsize = 101
