@@ -21,8 +21,14 @@
 )
 #$w1: diff(u,x)$
 ;(print $w1)
-#$stringout("malisp.out",w1)$
+#$stringout("malisp.txt",w1)$
 #$block(w2,w2: diff(w,x), w3: diff(u,x))$
 #$w2;$
 #$print(w2,w3)$
-#$stringout("malisp1.out",w2,w3)$
+#$stringout("malisp1.txt",w2,w3)$
+#$(x: 24,y: 24)$
+#$(w4(x,y):=(x+y)^6 , w5(x,y):=(x+y)^8)$
+#$print(w4(x,y),w5(x,y))$
+#$(w6(x,y):=(x+y) , w7(x,y):=(x+y)^2)$
+#$print(genfact(x,x,1))$
+#$print(genfact(w6(x,y),w6(x,y)/2,2))$
