@@ -42,8 +42,9 @@
 #$print(w10)$
 #$(h[i,j]:= harmonic(i,j,3,4))$
 #$print(genmatrix(h,3,3))$
-#$(load (descriptive))$
-#$(load (descriptive))$
+#$(errcatch(load (descriptive)))$
+#$(errcatch(load (descriptive)))$
+;#$(load (descriptive))$
 #$(s1: read_list(file_search("wind.data")))$
 #$(w11: harmonic_mean(s1))$
 #$print(w11)$
